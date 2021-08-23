@@ -17,3 +17,5 @@ function Circle(radius) {
 
 const circle = new Circle(1);
 console.log(circle);
+
+console.log(global);
