@@ -19,3 +19,7 @@ const circle = new Circle(1);
 console.log(circle);
 
 console.log(global);
+
+const person = { name: "Lee" };
+
+person;
