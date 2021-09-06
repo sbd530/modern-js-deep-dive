@@ -37,6 +37,8 @@
         let timerId;
 
         return (event) => {
+          // delay 가  경과하기 전에 이벤트가 발생해봤자 소용없고
+          // delay 가 끝나자마자 첫번째 이벤트를 인정해여 타이머를 초기화한다.
           if (timerId) return;
           timerId = setTimeout(
             () => {
@@ -55,6 +57,13 @@
       });
 
       let throttleCount = 0;
+
+      $container.addEventListener(
+        "scroll",
+        throttle(() => {
+          $throttleCount.textContent = ++throttleCount;
+        }, 100)
+      );
     </script>
   </body>
 </html>
