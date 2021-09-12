@@ -1,3 +1,4 @@
+import "@babel/polyfill"; // @babel/polyfill 를 로드한다.
 import { pi, power, Foo } from "./lib";
 
 console.log(pi);
