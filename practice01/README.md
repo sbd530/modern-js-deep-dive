@@ -84,7 +84,7 @@ npm install -D jest @types/jest @babel/core @babel/preset-env
 
 - 조회 쿼리 예
 
-```json
+```shell
 $ find apple
 
 {
@@ -97,7 +97,7 @@ $ find apple
 }
 ```
 
-```json
+```shell
 $ find like *ppl*
 
 {
@@ -118,7 +118,7 @@ $ find like *ppl*
 }
 ```
 
-```json
+```shell
 $ find --all
 
 {
@@ -140,13 +140,13 @@ $ find --all
 ...
 ```
 
-```json
+```shell
 $ find grape
 
 No such fruit.
 ```
 
-```json
+```shell
 $ findsomething
 $ find
 $ find--all
@@ -158,7 +158,7 @@ Wrong Grammer.
 
 - 삭제 쿼리 예
 
-```json
+```shell
 $ delete apple
 apple deleted.
 
