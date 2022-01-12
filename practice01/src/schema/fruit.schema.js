@@ -6,7 +6,7 @@ export class Fruit {
   #origins = [];
 
   constructor(id, name = "noname", origins = []) {
-    if (isNotValid(id)) throw new DBError();
+    if (isNotValid(id)) throw new DBError("invalid id.");
     this.#id = id;
     this.#name = name;
     this.#origins = origins;

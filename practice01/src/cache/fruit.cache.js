@@ -3,7 +3,7 @@ export default class FruitCache {
   constructor() {
     this.#cache = new Map();
   }
-  async save(fruit) {
+  save(fruit) {
     this.#cache.set(fruit.name || "noname", fruit);
   }
 
@@ -17,5 +17,9 @@ export default class FruitCache {
 
   clear() {
     this.#cache.clear();
+  }
+
+  get size() {
+    return this.#cache.size;
   }
 }
