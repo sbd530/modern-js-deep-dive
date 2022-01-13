@@ -25,6 +25,10 @@ export class Fruit {
     return this.#origins;
   }
 
+  builder() {
+    return new FruitBuilder();
+  }
+
   toString() {
     return `{_id:${this.id},_name:"${this.#name}"}`;
   }
