@@ -16,21 +16,18 @@ export class Fruit {
   get id() {
     return this.#id;
   }
-
   get name() {
     return this.#name;
   }
-
   get origins() {
     return this.#origins;
   }
 
-  builder() {
-    return new FruitBuilder();
-  }
-
   toString() {
-    return `{_id:${this.id},_name:"${this.#name}"}`;
+    const originsString = this.#origins
+      .map((obj) => `{origin:"${obj.origin}",price:"${obj.price}"}`)
+      .join(",");
+    return `{name:"${this.#name}",origins:[${originsString}]}`;
   }
 }
 
