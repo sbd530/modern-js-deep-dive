@@ -25,7 +25,7 @@ export class Fruit {
 
   toString() {
     const originsString = this.#origins
-      .map((obj) => `{origin:"${obj.origin}",price:"${obj.price}"}`)
+      .map((obj) => `{origin:"${obj.origin}",price:${obj.price}}`)
       .join(",");
     return `{name:"${this.#name}",origins:[${originsString}]}`;
   }

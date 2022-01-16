@@ -10,7 +10,6 @@ const password = readlineSync.question("Enter password? ", {
   hideEchoBack: true,
   mask: "?",
 });
-
 if (await loginFailed(userid, password)) {
   console.info("No such user.");
   process.exit(0);
@@ -20,26 +19,31 @@ if (await loginFailed(userid, password)) {
 const cache = new FruitCache();
 getFruitsFromDB().forEach((fruit) => cache.save(fruit));
 
-//* ready for user's query
+//* Ready for user's query
 while (true) {
   const query = readlineSync.question("> ");
+  translate(query);
+}
+
+async function loginFailed(userid, password) {
+  const useridMatch = process.env.USER_ID === userid;
+  const passwordMatch = await comparePwd(password, process.env.PASSWORD);
+  return useridMatch && !passwordMatch;
+}
+
+function translate(query) {
   if (query.includes("find")) {
     console.info(findFruit(query));
   } else if (query.includes("delete")) {
   } else if (query.trim() === "exit") {
     console.info("See ya.");
     process.exit(0);
+  } else if (query.trim() === "help") {
+    console.log("Find one : find [fruit]");
+    console.log("Find all : find --all");
   } else {
     console.log("Wrong grammer.");
   }
-}
-
-// TODO : output .db data
-
-async function loginFailed(userid, password) {
-  const useridMatch = process.env.USER_ID === userid;
-  const passwordMatch = await comparePwd(password, process.env.PASSWORD);
-  return useridMatch && !passwordMatch;
 }
 
 function findFruit(query) {
