@@ -96,6 +96,15 @@
             "origins": [
                 { "origin": "newzealand", "price": 1000 }
             ]
+        },
+        {
+            "_id": 12,
+            "name": "pineapple",
+            "origins": [
+                { "origin": "korea", "price": 1000 },
+                { "origin": "japan", "price": 2000 },
+                { "origin": "jeju", "price": 2000 }
+            ]
         }
     ]
 }

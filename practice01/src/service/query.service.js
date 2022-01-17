@@ -13,31 +13,50 @@ export default function acceptQuery() {
     translate(query);
   }
 
-  function translate(query) {
-    if (query.includes("find")) {
-      console.info(findFruit(query));
-    } else if (query.includes("delete")) {
-    } else if (query.trim() === "exit") {
-      console.info("See ya.");
-      process.exit(0);
-    } else if (query.trim() === "help") {
-      console.log("Find one : find [fruit]");
-      console.log("Find all : find --all");
-    } else {
-      console.log("Wrong grammer.");
-    }
+  function translate(query = "") {
+    if (query.includes(process.env.FIND)) console.info(findFruit(query));
+    else if (query.includes(process.env.DELETE))
+      // TODO : Implement delete.
+      console.log("delete something!");
+    else if (query.trim() === process.env.EXIT) exitProgram();
+    else if (query.trim() === process.env.HELP) infoHelp();
+    else console.log(process.env.WRONG_GRAMMER);
   }
 
-  function findFruit(query) {
+  function findFruit(query = "") {
     const arr = query.trim().split(/\s+/);
-    if (arr.length !== 2) return "Wrong grammer.";
-    if (arr[1] === "--all") {
-      return cache
-        .findAll()
-        .map((fruit) => fruit.toString())
-        .join(",\n");
-    }
+    if (arr.length !== 2) return process.env.WRONG_GRAMMER;
+
+    const target = arr[1];
+    if (target === process.env.ALL) return findAllToString();
+    else if (target.includes("*")) return findLikeToString(target);
+
     const fruit = cache.find(arr[1]);
-    return fruit === null ? "No such fruit." : fruit.toString();
+    return fruit === null ? process.env.NO_FRUIT : fruit.toString();
+  }
+
+  function findAllToString() {
+    return cache
+      .findAll()
+      .map((fruit) => fruit.toString())
+      .join(",\n");
+  }
+
+  function findLikeToString(target = "*") {
+    return cache
+      .findLike(target)
+      .map((fruit) => fruit.toString())
+      .join(",\n");
+  }
+
+  function exitProgram() {
+    console.info("See ya.");
+    process.exit(0);
+  }
+
+  function infoHelp() {
+    console.info("Find one : find [fruit]");
+    console.info("Find any : find (*)[fruit](*)");
+    console.info("Find all : find --all");
   }
 }

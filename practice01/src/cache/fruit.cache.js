@@ -5,8 +5,8 @@ export default class FruitCache {
     this.#cache = new Map();
   }
 
-  save(fruit) {
-    this.#cache.set(fruit.name || "noname", fruit);
+  save(aFruit) {
+    this.#cache.set(aFruit.name || "noname", aFruit);
   }
 
   find(name) {
@@ -15,6 +15,12 @@ export default class FruitCache {
 
   findAll() {
     return Array.from(this.#cache).map((entry) => entry[1]);
+  }
+  //*  *some*thing*
+  findLike(aWord) {
+    aWord = aWord.replace(/\*/g, ".*");
+    const regexp = new RegExp(aWord);
+    return this.findAll().filter((aFruit) => regexp.test(aFruit.name));
   }
 
   delete(name) {
