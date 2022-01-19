@@ -15,7 +15,8 @@ export default function acceptQuery() {
 
   function translate(query = "") {
     if (query.includes(process.env.FIND)) console.info(findFruit(query));
-    else if (query.includes(process.env.DELETE)) deleteFruit(query);
+    else if (query.includes(process.env.DELETE))
+      console.info(deleteFruit(query));
     else if (query.trim() === process.env.EXIT) exitProgram();
     else if (query.trim() === process.env.HELP) infoHelp();
     else console.log(process.env.WRONG_GRAMMER);
@@ -47,7 +48,28 @@ export default function acceptQuery() {
       .join(",\n");
   }
 
-  function deleteFruit(query = "") {}
+  function deleteFruit(query = "") {
+    const arr = query.trim().split(/\s+/);
+    if (arr.length !== 2) return process.env.WRONG_GRAMMER;
+
+    const target = arr[1];
+    if (target === process.env.ALL) return deleteAllToString();
+
+    const fruit = cache.find(arr[1]);
+    if (fruit === null) return "No such fruit.";
+    return deleteFruitToString();
+  }
+
+  function deleteAllToString() {
+    cache.clear();
+    //* cache to file sync
+    return "All data has been deleted.";
+  }
+
+  function deleteFruitToString(target) {
+    cache.delete(target);
+    return "apple has been deleted.";
+  }
 
   function exitProgram() {
     console.info("See ya.");
