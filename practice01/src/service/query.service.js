@@ -15,9 +15,7 @@ export default function acceptQuery() {
 
   function translate(query = "") {
     if (query.includes(process.env.FIND)) console.info(findFruit(query));
-    else if (query.includes(process.env.DELETE))
-      // TODO : Implement delete.
-      console.log("delete something!");
+    else if (query.includes(process.env.DELETE)) deleteFruit(query);
     else if (query.trim() === process.env.EXIT) exitProgram();
     else if (query.trim() === process.env.HELP) infoHelp();
     else console.log(process.env.WRONG_GRAMMER);
@@ -48,6 +46,8 @@ export default function acceptQuery() {
       .map((fruit) => fruit.toString())
       .join(",\n");
   }
+
+  function deleteFruit(query = "") {}
 
   function exitProgram() {
     console.info("See ya.");
