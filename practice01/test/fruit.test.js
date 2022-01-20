@@ -21,9 +21,9 @@ describe("the fruit-cache works", () => {
     cache.save(anotherFruit);
   });
 
-  test("if the cache can be read", async () => {
-    const expectApple = await cache.find("apple");
-    const expectBanana = await cache.find("banana");
+  test("if the cache can be read", () => {
+    const expectApple = cache.find("apple");
+    const expectBanana = cache.find("banana");
 
     expect(expectApple.id).toBe(0);
     expect(expectApple.origins[0].origin).toBe("korea");
@@ -31,10 +31,10 @@ describe("the fruit-cache works", () => {
     expect(expectBanana.origins[1].origin).toBe("japan");
   });
 
-  test("if fruits can be delete from the cache", async () => {
+  test("if fruits can be delete from the cache", () => {
     const originSize = cache.size;
     cache.delete("apple");
-    const apple = await cache.find("apple");
+    const apple = cache.find("apple");
 
     expect(originSize - cache.size).toBe(1);
     expect(apple).toBeNull();

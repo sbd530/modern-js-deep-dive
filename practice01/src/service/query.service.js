@@ -1,6 +1,6 @@
 import readlineSync from "readline-sync";
 import FruitCache from "../cache/fruit.cache";
-import { getFruitsFromDB } from "../util/io.util";
+import { getFruitsFromDB, writeFruitsToDB } from "../util/io.util";
 
 export default function acceptQuery() {
   //* .db data cache
@@ -42,10 +42,11 @@ export default function acceptQuery() {
   }
 
   function findLikeToString(target = "*") {
-    return cache
+    const result = cache
       .findLike(target)
       .map((fruit) => fruit.toString())
       .join(",\n");
+    return result.trim() === "" ? "No such fruit." : result;
   }
 
   function deleteFruit(query = "") {
@@ -57,18 +58,32 @@ export default function acceptQuery() {
 
     const fruit = cache.find(arr[1]);
     if (fruit === null) return "No such fruit.";
-    return deleteFruitToString();
+    return deleteFruitToString(arr[1]);
   }
 
   function deleteAllToString() {
     cache.clear();
-    //* cache to file sync
+    cacheToFile();
     return "All data has been deleted.";
   }
 
   function deleteFruitToString(target) {
     cache.delete(target);
+    cacheToFile();
     return "apple has been deleted.";
+  }
+
+  function cacheToFile() {
+    const data = cache.findAll().map((fruit) => toLiteralFruit(fruit));
+    writeFruitsToDB(data);
+  }
+
+  function toLiteralFruit(fruit) {
+    return {
+      _id: fruit.id,
+      name: fruit.name,
+      origins: fruit.origins,
+    };
   }
 
   function exitProgram() {

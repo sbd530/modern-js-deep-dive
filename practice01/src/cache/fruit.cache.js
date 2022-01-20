@@ -19,7 +19,8 @@ export default class FruitCache {
   //*  *some*thing*
   findLike(aWord) {
     aWord = aWord.replace(/\*/g, ".*");
-    const regexp = new RegExp(aWord);
+    console.log(aWord);
+    const regexp = new RegExp(`^${aWord}$`);
     return this.findAll().filter((aFruit) => regexp.test(aFruit.name));
   }
 

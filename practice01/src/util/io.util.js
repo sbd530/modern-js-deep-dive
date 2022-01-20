@@ -8,3 +8,12 @@ export function getFruitsFromDB() {
     (rawFruit) => new Fruit(rawFruit._id, rawFruit.name, rawFruit.origins)
   );
 }
+
+export function writeFruitsToDB(fruits = []) {
+  const literal = {
+    encode: "utf8",
+    data: fruits,
+  };
+  const entireData = JSON.stringify(literal, null, 2);
+  fs.writeFileSync("./mango.db", entireData, "utf8");
+}
