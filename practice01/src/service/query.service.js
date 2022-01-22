@@ -70,7 +70,7 @@ export default function acceptQuery() {
   function deleteFruitToString(target) {
     cache.delete(target);
     cacheToFile();
-    return "apple has been deleted.";
+    return `${target} has been deleted.`;
   }
 
   function cacheToFile() {
