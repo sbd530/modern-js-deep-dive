@@ -23,7 +23,6 @@ export default class Stack {
       this._latestNode = aNode;
     }
     this._size += 1;
-    return this;
   }
 
   pop() {
