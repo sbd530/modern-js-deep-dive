@@ -18,7 +18,8 @@
     "jest": "^27.4.7"
   },
   "dependencies": {
-    "@babel/runtime": "^7.16.7"
+    "@babel/runtime": "^7.16.7",
+    "lodash": "^4.17.21"
   },
   "type": "module"
 }
